@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <locale.h>
 
-int tam = 30;
-
 typedef struct{
-    int codigo[tam];
-    float valorCompra[tam];
-    float valorVenda[tam];
-    float lucro[tam];
+    char codigo[30];
+    float valor_compra;
+    float valor_venda;
+    float lucro;
 }Ativo;
+
 
 int menuAcao = 0; //Variável de controle das opções do menu inicial
 
@@ -49,10 +49,25 @@ int atualizarAtivo(){
     scanf("%i", &menuAcao);
     printf("\n\n");
 }
-int excluirAtivo(){
+int excluirAtivo(Ativo ativos[],int total){
     system("cls");
+
     printf("EXCLUIR UM ATIVO\n");
-    printf("\nBloco de código da função aqui");
+
+    char cod;
+    int k = 0;
+
+    printf("Qual o código do ativo a ser removido?\n");
+    scanf("%s",&cod);
+
+    for(int i = 0;i<total;i++){
+        if(strcmp(ativos[i].codigo,cod) == 0){
+            k++;
+        }
+        ativos[i] = ativos[k];
+        k++;
+    }
+    return total -= 1;
 
     printf("\n\nPressione 0 para VOLTAR: ");
     scanf("%i", &menuAcao);
@@ -62,6 +77,8 @@ int excluirAtivo(){
 int main()
 {
     setlocale(LC_ALL,"");
+
+    int total = 40;
 
     do{
         system("cls");
